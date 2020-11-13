@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <h1>Home page</h1>
-      <Link to="/room">Go to video conference room</Link>
+      <Link to="/groupchat">Go to the chat room</Link>
     </>
   );
 }
