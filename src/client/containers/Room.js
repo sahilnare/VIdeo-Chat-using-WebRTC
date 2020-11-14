@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-
-import Video from './Video';
+import Wave from "@foobar404/wave"
+import AudioWave from './AudioWave';
 
 
 const videoConstraints = {
@@ -15,10 +15,10 @@ class Room extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peers: []
+      peers: [],
+      stream: null
     }
-    this.videoRef = React.createRef();
-    this.userVideo = React.createRef();
+    // this.userVideo = React.createRef();
     this.peersRef = React.createRef();
   }
 
@@ -28,8 +28,14 @@ class Room extends Component {
     this.socket = io.connect("/");
     this.peersRef.current = [];
 
-    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
-      this.userVideo.current.srcObject = stream;
+    navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
+      // this.userVideo.current.srcObject = stream;
+      // let wave = new Wave();
+      //
+      // wave.fromElement("userAudio", "userCanvas", {
+      //   type: "star",
+      //   colors: ["red", "white", "blue"]
+      // });
 
       this.socket.emit("join room", roomID);
 
@@ -41,7 +47,10 @@ class Room extends Component {
             peerID: userID,
             peer
           });
-          peers.push(peer);
+          peers.push({
+            peerID: userID,
+            peer
+          });
         });
         this.setState({peers: peers});
       });
@@ -52,14 +61,28 @@ class Room extends Component {
           peerID: payload.callerID,
           peer
         });
+        const peerObj = {
+          peerID: payload.callerID,
+          peer
+        }
         this.setState(prevState => {
-          return {peers: [...prevState.peers, peer]}
+          return {peers: [...prevState.peers, peerObj]}
         });
       });
 
       this.socket.on("receiving returned signal", payload => {
         const item = this.peersRef.current.find(p => p.peerID === payload.id);
         item.peer.signal(payload.signal);
+      });
+
+      this.socket.on("user left", id => {
+        const peerObj = this.peersRef.current.find(p => p.peerID === id);
+        if(peerObj) {
+          peerObj.peer.destroy();
+        }
+        const peers = this.peersRef.current.filter(p => p.peerID !== id);
+        this.peersRef.current = peers;
+        this.setState({peers: peers});
       });
     });
   }
@@ -96,17 +119,20 @@ class Room extends Component {
 
   render() {
     const roomID = this.props.match.params.roomID;
-    console.log(this.peersRef);
+    if(this.state.stream) {
+      console.log(this.state.stream.getTracks());
+    }
     return (
         <div>
           <div>
             <h1>Room ID: {roomID}</h1>
           </div>
           <div>
-            <video muted ref={this.userVideo} autoPlay playsInline />
+            {/*<canvas id="userCanvas" height="500" width="500" />
+            <audio id="userAudio" muted ref={this.userVideo} autoPlay />*/}
             {this.state.peers.map((peer, index) => {
                 return (
-                    <Video key={index} peer={peer} />
+                    <AudioWave key={peer.peerID} id={peer.peerID} peer={peer.peer} />
                 );
             })}
           </div>

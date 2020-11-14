@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 
 
-class Video extends Component {
+class AudioWave extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
     }
-    this.videoRef = React.createRef();
+    this.audioRef = React.createRef();
   }
 
   componentDidMount() {
     this.props.peer.on("stream", stream => {
-        this.videoRef.current.srcObject = stream;
+        this.audioRef.current.srcObject = stream;
     })
   }
 
   render() {
     return (
-      <video playsInline autoPlay ref={this.videoRef} />
+      <audio playsInline autoPlay ref={this.audioRef} />
     );
   }
 
 }
 
-export default Video;
+export default AudioWave;
