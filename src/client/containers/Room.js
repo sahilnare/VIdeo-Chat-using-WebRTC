@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import Wave from "@foobar404/wave"
-import AudioWave from './AudioWave';
+// import Wave from "@foobar404/wave"
+import Video from './Video';
 
 
 const videoConstraints = {
@@ -18,7 +18,7 @@ class Room extends Component {
       peers: [],
       stream: null
     }
-    // this.userVideo = React.createRef();
+    this.userVideo = React.createRef();
     this.peersRef = React.createRef();
   }
 
@@ -28,8 +28,8 @@ class Room extends Component {
     this.socket = io.connect("/");
     this.peersRef.current = [];
 
-    navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
-      // this.userVideo.current.srcObject = stream;
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      this.userVideo.current.srcObject = stream;
       // let wave = new Wave();
       //
       // wave.fromElement("userAudio", "userCanvas", {
@@ -158,9 +158,10 @@ class Room extends Component {
           <div>
             {/*<canvas id="userCanvas" height="500" width="500" />
             <audio id="userAudio" muted ref={this.userVideo} autoPlay />*/}
+            <video muted ref={this.userVideo} autoPlay playsInline />
             {this.state.peers.map((peer, index) => {
                 return (
-                    <AudioWave key={peer.peerID} id={peer.peerID} peer={peer.peer} />
+                    <Video key={peer.peerID} id={peer.peerID} peer={peer.peer} />
                 );
             })}
           </div>
