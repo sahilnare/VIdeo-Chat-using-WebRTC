@@ -91,6 +91,20 @@ class Room extends Component {
     const peer = new Peer({
       initiator: true,
       trickle: false,
+      config: {
+        iceServers: [
+            {
+              urls: "stun:numb.viagenie.ca",
+              username: "sahilnare78@gmail.com",
+              credential: "holapeeps"
+            },
+            {
+              urls: "turn:numb.viagenie.ca",
+              username: "sahilnare78@gmail.com",
+              credential: "holapeeps"
+            }
+        ]
+      },
       stream: stream
     });
 
@@ -105,6 +119,20 @@ class Room extends Component {
     const peer = new Peer({
       initiator: false,
       trickle: false,
+      config: {
+        iceServers: [
+            {
+              urls: "stun:numb.viagenie.ca",
+              username: "sahilnare78@gmail.com",
+              credential: "holapeeps"
+            },
+            {
+              urls: "turn:numb.viagenie.ca",
+              username: "sahilnare78@gmail.com",
+              credential: "holapeeps"
+            }
+        ]
+      },
       stream: stream
     });
 
