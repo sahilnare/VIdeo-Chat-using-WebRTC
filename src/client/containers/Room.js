@@ -90,7 +90,7 @@ class Room extends Component {
   createPeer = (userToSignal, callerID, stream) => {
     const peer = new Peer({
       initiator: true,
-      trickle: false,
+      trickle: true,
       config: {
         iceServers: [
             {
@@ -118,7 +118,7 @@ class Room extends Component {
   addPeer = (incomingSignal, callerID, stream) => {
     const peer = new Peer({
       initiator: false,
-      trickle: false,
+      trickle: true,
       config: {
         iceServers: [
             {
