@@ -94,14 +94,25 @@ class Room extends Component {
       config: {
         iceServers: [
             {
-              urls: "stun:numb.viagenie.ca",
-              username: "sahilnare78@gmail.com",
-              credential: "holapeeps"
+              urls: "stun:stun.l.google.com:19302"
             },
             {
-              urls: "turn:numb.viagenie.ca",
-              username: "sahilnare78@gmail.com",
-              credential: "holapeeps"
+              urls: "stun:stun1.l.google.com:19302"
+            },
+            // {
+            //   urls: "stun:numb.viagenie.ca",
+            //   username: "sahilnare78@gmail.com",
+            //   credential: "holapeeps"
+            // },
+            // {
+            //   urls: "turn:numb.viagenie.ca",
+            //   username: "sahilnare78@gmail.com",
+            //   credential: "holapeeps"
+            // },
+            {
+              urls: "turn:relay.backups.cz?transport=tcp",
+              username: "webrtc",
+              credential: "webrtc"
             }
         ]
       },
@@ -122,14 +133,25 @@ class Room extends Component {
       config: {
         iceServers: [
             {
-              urls: "stun:numb.viagenie.ca",
-              username: "sahilnare78@gmail.com",
-              credential: "holapeeps"
+              urls: "stun:stun.l.google.com:19302"
             },
             {
-              urls: "turn:numb.viagenie.ca",
-              username: "sahilnare78@gmail.com",
-              credential: "holapeeps"
+              urls: "stun:stun1.l.google.com:19302"
+            },
+            // {
+            //   urls: "stun:numb.viagenie.ca",
+            //   username: "sahilnare78@gmail.com",
+            //   credential: "holapeeps"
+            // },
+            // {
+            //   urls: "turn:numb.viagenie.ca",
+            //   username: "sahilnare78@gmail.com",
+            //   credential: "holapeeps"
+            // },
+            {
+              urls: "turn:relay.backups.cz?transport=tcp",
+              username: "webrtc",
+              credential: "webrtc"
             }
         ]
       },
