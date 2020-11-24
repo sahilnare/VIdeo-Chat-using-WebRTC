@@ -93,9 +93,9 @@ class Room extends Component {
       trickle: true,
       config: {
         iceServers: [
-            {
-              urls: "stun:stun.l.google.com:19302"
-            },
+            // {
+            //   urls: "stun:stun.l.google.com:19302"
+            // },
             {
               urls: "stun:stun1.l.google.com:19302"
             },
@@ -132,9 +132,9 @@ class Room extends Component {
       trickle: true,
       config: {
         iceServers: [
-            {
-              urls: "stun:stun.l.google.com:19302"
-            },
+            // {
+            //   urls: "stun:stun.l.google.com:19302"
+            // },
             {
               urls: "stun:stun1.l.google.com:19302"
             },
