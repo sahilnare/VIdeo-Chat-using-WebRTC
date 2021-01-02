@@ -1,4 +1,4 @@
-# HolaPeeps
+# Video Chat Using WebRTC
 
 
 ## Quick Start
